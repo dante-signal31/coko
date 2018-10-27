@@ -1,4 +1,4 @@
-# coko
+# Copy Over Keeping Owners (coko)
 Tool to overwrite directories using files from a different owners but keeping original owners and permissions.
 ____
 Sometimes you have a directory full of files you want to overwrite periodically. 
