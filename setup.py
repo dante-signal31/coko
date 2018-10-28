@@ -33,7 +33,7 @@ setup(name="coko",
                    'License :: OSI Approved :: BSD License',
                    'Operating System :: POSIX :: Linux',
                    'Programming Language :: Python :: 3'],
-      keywords="copy over keeping owners",
+      keywords="copy over keeping ownersHIP",
       install_requires=[],
       zip_safe=False,
       # TODO: This exclude is not working when building wheels, tests package
