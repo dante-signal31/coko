@@ -10,8 +10,8 @@ def verify_python_version(major_version: int, minor_revision: int)-> None:
     :param minor_revision: Needed minor version for Python interpreter.
     """
     if (major_version, minor_revision) > sys.version_info:
-        message = "This program can only be run on Python {0}.{1} or newer, " \
-                  "you are trying to use Python {2}.{3} instead.\nAborting " \
-                  "execution.".format(major_version, minor_revision,
-                                      sys.version_info[0], sys.version_info[1])
+        message = f"This program can only be run on Python {major_version}" \
+                  f".{minor_version} or newer, you are trying to use Python " \
+                  f"{sys.version_info[0]}.{sys.version_info[1]} instead.\nAborting " \
+                  "execution."
         sys.exit(message)
