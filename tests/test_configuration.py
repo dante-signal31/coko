@@ -27,14 +27,28 @@ class TestConfiguration(unittest.TestCase):
         except Exception as e:
             self.fail(f"Test failed with exception {e}")
         self.assertEqual(correct_path, config.source_folder)
-        self.assertEqual(correct_path, config.destination_folder_path)
+        self.assertEqual(correct_path, config.destination_folder)
 
     def test_incorrect_paths(self):
         """ Check an exceptions is raised if any incorrect path is entered.
         """
-        incorrect_path = _get_random_string(8)
-        with self.assertRaises(exceptions.FolderNotFound) as e:
-            self.assertEqual(e.exception.msg, incorrect_path)
+        incorrect_path = os.path.join(os.getcwd(), _get_random_string(8))
+        correct_path = os.getcwd()
+        try:
+            _ = configuration.Configuration(incorrect_path, correct_path)
+        except exceptions.FolderNotFound as e:
+            self.assertEqual(incorrect_path, e.incorrect_path)
+        else:
+            self.fail("FileNotFound exception not raised for wrong "
+                      "source folder.")
+        try:
+            _ = configuration.Configuration(correct_path, incorrect_path)
+        except exceptions.FolderNotFound as e:
+            self.assertEqual(incorrect_path, e.incorrect_path)
+        else:
+            self.fail("FileNotFound exception not raised for wrong "
+                      "destination folder.")
+
 
 
 if __name__ == '__main__':

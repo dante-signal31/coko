@@ -18,11 +18,12 @@ def parse_arguments(args: list=None) -> Dict[str, str]:
                             nargs=1, default=None,
                             help="Destination folder where you want copy "
                                  "files to.")
+    # TODO: Update help when default ownership is ready.
     arg_parser.add_argument("-c", "--create", dest="default_ownership",
                             nargs=3, metavar="UID GUID PERMISSION", default=None,
                             help="Copy over files not present at destination "
                                  "folder yet and set for them given uid and guid " \
-                                 "and permission.")
+                                 "and permission. (DOES NOT WORK. PENDING)")
     # Parse_args returns each parameter in a list. We must take them out.
     parsed_arguments = {item: (value[0] if item != "default_ownership"
                                else value)

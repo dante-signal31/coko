@@ -14,7 +14,7 @@ class TestConsoleParser(unittest.TestCase):
         cls._source_folder = tempfile.mkdtemp()
         cls._destination_folder = tempfile.mkdtemp()
 
-    def test_correct_input(self):
+    def test_input(self):
         """ Test a correct input of two folders are properly parsed.
         """
         parsed_arguments = console_parser.parse_arguments(f"{self.__class__._source_folder} "
@@ -24,7 +24,7 @@ class TestConsoleParser(unittest.TestCase):
         self.assertEqual(self.__class__._destination_folder,
                          parsed_arguments["destination_folder"])
 
-    def test_create_correct_arguments(self):
+    def test_optional_arguments(self):
         """ Test correct optional parameters are properly parsed.
         """
         parsed_arguments = console_parser.parse_arguments(f"{self.__class__._source_folder} "

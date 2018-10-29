@@ -4,4 +4,6 @@ class CokoException(Exception):
 
 
 class FolderNotFound(CokoException):
-    pass
+
+    def __init__(self, incorrect_path):
+        self.incorrect_path = incorrect_path
