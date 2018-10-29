@@ -1,5 +1,4 @@
 import argparse
-import os.path
 from typing import Dict
 
 
