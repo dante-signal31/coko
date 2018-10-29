@@ -1,8 +1,15 @@
 import argparse
+import sys
 from typing import Dict
 
+import coko.classes.configuration as configuration
+import coko.classes.exceptions as exceptions
 
-def parse_arguments(args: list=None) -> Dict[str, str]:
+
+def parse_arguments(args: list=None) -> configuration.Configuration:
+    """ Parse console arguments to generate a Configuration object we
+    can work with.
+    """
     arg_parser = argparse.ArgumentParser(description="A Tool to overwrite directories "
                                                      "using files from a different "
                                                      "owners but keeping original "
@@ -28,5 +35,11 @@ def parse_arguments(args: list=None) -> Dict[str, str]:
     parsed_arguments = {item: (value[0] if item != "default_ownership"
                                else value)
                         for (item, value) in vars(arg_parser.parse_args(args)).items()}
-
-    return parsed_arguments
+    try:
+        config = configuration.Configuration(parsed_arguments["source_folder"],
+                                             parsed_arguments["destination_folder"],
+                                             parsed_arguments["default_ownership"])
+    except exceptions.FolderNotFound as e:
+        print(f"Folder not found: {e.incorrect_path}")
+        sys.exit(1)
+    return config

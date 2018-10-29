@@ -22,8 +22,10 @@ class TestConfiguration(unittest.TestCase):
         """ All parameters right, we should get a correct object
         """
         correct_path = os.getcwd()
+        correct_permissions = [1, 10, 777]
         try:
-            config = configuration.Configuration(correct_path, correct_path)
+            config = configuration.Configuration(correct_path, correct_path,
+                                                 correct_permissions)
         except Exception as e:
             self.fail(f"Test failed with exception {e}")
         self.assertEqual(correct_path, config.source_folder)
@@ -34,15 +36,18 @@ class TestConfiguration(unittest.TestCase):
         """
         incorrect_path = os.path.join(os.getcwd(), _get_random_string(8))
         correct_path = os.getcwd()
+        correct_permissions = [1, 10, 777]
         try:
-            _ = configuration.Configuration(incorrect_path, correct_path)
+            _ = configuration.Configuration(incorrect_path, correct_path,
+                                            correct_permissions)
         except exceptions.FolderNotFound as e:
             self.assertEqual(incorrect_path, e.incorrect_path)
         else:
             self.fail("FileNotFound exception not raised for wrong "
                       "source folder.")
         try:
-            _ = configuration.Configuration(correct_path, incorrect_path)
+            _ = configuration.Configuration(correct_path, incorrect_path,
+                                            correct_permissions)
         except exceptions.FolderNotFound as e:
             self.assertEqual(incorrect_path, e.incorrect_path)
         else:
