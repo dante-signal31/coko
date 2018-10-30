@@ -15,6 +15,9 @@ def set_ownership(file_path: str, file_info: configuration.FileOwnership)-> None
     """ Set file for uid, guid and permissions given through a FileOwnership
     object.
 
+    To use this function application should be run as sudo, otherwise the only
+    you'll get is an "Operation not permitted" error.
+
     :param file_path: Absolute file path whose permissions we want to set.
     :param file_info: UID, GUID and access permission to set for this file.
     :return: None
