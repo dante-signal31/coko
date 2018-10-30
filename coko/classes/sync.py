@@ -11,6 +11,17 @@ class FileInfo:
     ownership: configuration.FileOwnership
 
 
+def get_files(root_folder: str)-> str:
+    """ Iterator to get all files inside a nested folder tree.
+
+    :param root_folder: Base folder where to star getting files from.
+    :return: Iterator return absolute files path names.
+    """
+    for subdir, dirs, files in os.walk(root_folder):
+        for file in files:
+            yield os.path.join(subdir, file)
+
+
 def set_ownership(file_path: str, file_info: configuration.FileOwnership)-> None:
     """ Set file for uid, guid and permissions given through a FileOwnership
     object.
