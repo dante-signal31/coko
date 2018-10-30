@@ -19,8 +19,8 @@ def set_ownership(file_path: str, file_info: configuration.FileOwnership)-> None
     :param file_info: UID, GUID and access permission to set for this file.
     :return: None
     """
-    os.chown(file_path, file_info.ownership.uid, file_info.ownership.guid)
-    os.chmod(file_path, file_info.ownership.permissions)
+    os.chown(file_path, file_info.uid, file_info.guid)
+    os.chmod(file_path, file_info.permissions)
 
 
 def register_destination_files(config: configuration.Configuration)-> List[FileInfo]:

@@ -79,9 +79,7 @@ class TestSync(unittest.TestCase):
                                    DUMMY_DESTINATION_FOLDER) as test_bed:
             config = configuration.Configuration(test_bed.source_folder,
                                                  test_bed.destination_folder,
-                                                 configuration.FileOwnership(10,
-                                                                             30,
-                                                                             644))
+                                                 [10, 30, 644])
             stored_file_list: List[sync.FileInfo] = sync.register_destination_files(config)
             stored_file_dict: Dict[str, configuration.FileOwnership] = {item.relative_filename_path: item.ownership
                                                                         for item in stored_file_list}
@@ -102,9 +100,7 @@ class TestSync(unittest.TestCase):
                                    DUMMY_DESTINATION_FOLDER) as test_bed:
             config = configuration.Configuration(test_bed.source_folder,
                                                  test_bed.destination_folder,
-                                                 configuration.FileOwnership(10,
-                                                                             30,
-                                                                             644))
+                                                 [10, 30, 644])
             stored_file_list: List[sync.FileInfo] = sync.register_destination_files(config)
             sync.copy_files(config, stored_file_list)
             for stored_file in stored_file_list:
