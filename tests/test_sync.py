@@ -10,62 +10,76 @@ DUMMY_DESTINATION_FOLDER = [
     sync.FileInfo("executable",
                   configuration.FileOwnership(10,
                                               30,
-                                              755)),
+                                              755,
+                                              True)),
     sync.FileInfo("config",
                   configuration.FileOwnership(10,
                                               30,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/data1",
                   configuration.FileOwnership(10,
                                               30,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/data2",
                   configuration.FileOwnership(10,
                                               30,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder2/data3",
                   configuration.FileOwnership(10,
                                               30,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/folder2/data4",
                   configuration.FileOwnership(10,
                                               30,
-                                              644))
+                                              644,
+                                              True))
     ]
 
 DUMMY_SOURCE_FOLDER = [
     sync.FileInfo("executable",
                   configuration.FileOwnership(20,
                                               40,
-                                              755)),
+                                              755,
+                                              True)),
     sync.FileInfo("new_file1",
                   configuration.FileOwnership(20,
                                               40,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("config",
                   configuration.FileOwnership(20,
                                               40,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/data1",
                   configuration.FileOwnership(20,
                                               40,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/data2",
                   configuration.FileOwnership(20,
                                               40,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/new_file2",
                   configuration.FileOwnership(20,
                                               40,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder2/data3",
                   configuration.FileOwnership(20,
                                               40,
-                                              644)),
+                                              644,
+                                              True)),
     sync.FileInfo("folder1/folder2/data4",
                   configuration.FileOwnership(20,
                                               40,
-                                              644))
+                                              644,
+                                              True))
     ]
 
 
@@ -79,7 +93,7 @@ class TestSync(unittest.TestCase):
                                    DUMMY_DESTINATION_FOLDER) as test_bed:
             config = configuration.Configuration(test_bed.source_folder,
                                                  test_bed.destination_folder,
-                                                 [10, 30, 644])
+                                                 [10, 30, 644, True])
             stored_file_list: List[sync.FileInfo] = sync.register_destination_files(config)
             stored_file_dict: Dict[str, configuration.FileOwnership] = {item.relative_filename_path: item.ownership
                                                                         for item in stored_file_list}
@@ -100,7 +114,7 @@ class TestSync(unittest.TestCase):
                                    DUMMY_DESTINATION_FOLDER) as test_bed:
             config = configuration.Configuration(test_bed.source_folder,
                                                  test_bed.destination_folder,
-                                                 [10, 30, 644])
+                                                 [10, 30, 644, True])
             stored_file_list: List[sync.FileInfo] = sync.register_destination_files(config)
             sync.copy_files(config, stored_file_list)
             for stored_file in stored_file_list:

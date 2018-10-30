@@ -15,11 +15,13 @@ def get_files(root_folder: str)-> str:
     """ Iterator to get all files inside a nested folder tree.
 
     :param root_folder: Base folder where to star getting files from.
-    :return: Iterator return absolute files path names.
+    :return: Iterator return files path names relatives to root folder.
     """
     for subdir, dirs, files in os.walk(root_folder):
         for file in files:
-            yield os.path.join(subdir, file)
+            absolute_path = os.path.join(subdir, file)
+            relative_path = os.path.relpath(absolute_path, root_folder)
+            yield relative_path
 
 
 def set_ownership(file_path: str, file_info: configuration.FileOwnership)-> None:
@@ -44,7 +46,15 @@ def register_destination_files(config: configuration.Configuration)-> List[FileI
     :param config: Configuration generated from console parameters.
     :return: A list with a FileInfo object for every file in destination folder.
     """
-    pass
+    destination_files = []
+    for destination_file in get_files(config.destination_folder):
+        file_info = os.stat(os.path.join(config.destination_folder, destination_file))
+        permissions = configuration.FileOwnership(file_info.st_uid,
+                                                  file_info.st_gid,
+                                                  file_info.st_mode)
+        destination_files.append(FileInfo(destination_file,
+                                          permissions))
+    return destination_files
 
 
 def copy_files(config: configuration.Configuration,

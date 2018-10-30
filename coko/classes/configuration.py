@@ -10,6 +10,13 @@ class FileOwnership:
     uid: int
     guid: int
     permissions: int
+    permissions_octal: bool = dataclasses.field(default=False)
+
+    def __post_init__(self):
+        # We let user to enter permissions in octal but we convert to int
+        # because system functions we use deal with them as int.
+        if self.permissions_octal:
+            self.permissions = int(str(self.permissions), 8)
 
 
 class Folder(object):
@@ -42,7 +49,8 @@ class Configuration:
         if permissions is not None:
             self.permissions: FileOwnership = FileOwnership(permissions[0],
                                                             permissions[1],
-                                                            permissions[2])
+                                                            permissions[2],
+                                                            permissions[3])
         else:
             self.permissions = None
 
