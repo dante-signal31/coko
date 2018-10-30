@@ -1,19 +1,9 @@
 import os.path
-import random
-import string
 import unittest
 
 import coko.classes.configuration as configuration
 import coko.classes.exceptions as exceptions
-
-
-def _get_random_string(length: int) -> str:
-    """ Create a random string with given length.
-
-    Got from:  https://stackoverflow.com/questions/47073453/how-to-generate-a-random-string-with-symbols
-    """
-    return ''.join([random.choice(string.ascii_letters + string.digits)
-                    for n in range(length)])
+import tests.tools as tools
 
 
 class TestConfiguration(unittest.TestCase):
@@ -34,7 +24,7 @@ class TestConfiguration(unittest.TestCase):
     def test_incorrect_paths(self):
         """ Check an exceptions is raised if any incorrect path is entered.
         """
-        incorrect_path = os.path.join(os.getcwd(), _get_random_string(8))
+        incorrect_path = os.path.join(os.getcwd(), tools.get_random_string(8))
         correct_path = os.getcwd()
         correct_permissions = [1, 10, 777]
         try:
@@ -53,7 +43,6 @@ class TestConfiguration(unittest.TestCase):
         else:
             self.fail("FileNotFound exception not raised for wrong "
                       "destination folder.")
-
 
 
 if __name__ == '__main__':

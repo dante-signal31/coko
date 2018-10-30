@@ -1,6 +1,6 @@
-import argparse
 import tempfile
 import unittest
+
 import coko.classes.console_parser as console_parser
 
 

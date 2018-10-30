@@ -1,6 +1,5 @@
 import argparse
 import sys
-from typing import Dict
 
 import coko.classes.configuration as configuration
 import coko.classes.exceptions as exceptions
@@ -9,6 +8,9 @@ import coko.classes.exceptions as exceptions
 def parse_arguments(args: list=None) -> configuration.Configuration:
     """ Parse console arguments to generate a Configuration object we
     can work with.
+
+    :param args: Argument list. Usually it's the command you entered but split by spaces.
+    :return: Configuration object generated from parsed parameters console command.
     """
     arg_parser = argparse.ArgumentParser(description="A Tool to overwrite directories "
                                                      "using files from a different "
@@ -31,10 +33,13 @@ def parse_arguments(args: list=None) -> configuration.Configuration:
                             help="Copy over files not present at destination "
                                  "folder yet and set for them given uid and guid " \
                                  "and permission. (DOES NOT WORK. PENDING)")
-    # Parse_args returns each parameter in a list. We must take them out.
+
+    # Parse_args returns each parameter in a list. We must take them out so
+    # every value at dict is a string.
     parsed_arguments = {item: (value[0] if item != "default_ownership"
                                else value)
                         for (item, value) in vars(arg_parser.parse_args(args)).items()}
+
     try:
         config = configuration.Configuration(parsed_arguments["source_folder"],
                                              parsed_arguments["destination_folder"],
