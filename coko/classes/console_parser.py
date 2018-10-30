@@ -41,7 +41,9 @@ def parse_arguments(args: list=None) -> configuration.Configuration:
     parsed_arguments = {item: (value[0] if item != "default_ownership"
                                else value)
                         for (item, value) in vars(arg_parser.parse_args(args)).items()}
-
+    # User enter permission in octal, so I must add a True.
+    if  parsed_arguments["default_ownership"] is not None:
+        parsed_arguments["default_ownership"].append(True)
     try:
         config = configuration.Configuration(parsed_arguments["source_folder"],
                                              parsed_arguments["destination_folder"],

@@ -12,7 +12,7 @@ class TestConfiguration(unittest.TestCase):
         """ All parameters right, we should get a correct object
         """
         correct_path = os.getcwd()
-        correct_permissions = [1, 10, 777]
+        correct_permissions = [1, 10, 777, True]
         try:
             config = configuration.Configuration(correct_path, correct_path,
                                                  correct_permissions)
@@ -28,7 +28,7 @@ class TestConfiguration(unittest.TestCase):
         """
         incorrect_path = os.path.join(os.getcwd(), tools.get_random_string(8))
         correct_path = os.getcwd()
-        correct_permissions = [1, 10, 777]
+        correct_permissions = [1, 10, 777, True]
         try:
             _ = configuration.Configuration(incorrect_path, correct_path,
                                             correct_permissions)

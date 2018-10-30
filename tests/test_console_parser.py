@@ -31,7 +31,7 @@ class TestConsoleParser(unittest.TestCase):
         config = console_parser.parse_arguments(f"{self.__class__._source_folder} "
                                                           f"{self.__class__._destination_folder} "
                                                           f"--create 10 50 775".split())
-        self.assertEqual(configuration.FileOwnership(10, 50, 775),
+        self.assertEqual(configuration.FileOwnership(10, 50, 775, True),
                          config.permissions)
 
 
