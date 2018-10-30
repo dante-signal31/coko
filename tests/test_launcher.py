@@ -43,8 +43,6 @@ class TestLauncher(unittest.TestCase):
                     self.assertEqual(synced_file.ownership.guid, file_stat.st_gid)
                     self.assertEqual(synced_file.ownership.permissions, file_stat.st_mode)
 
-
-
     def test_launcher_create(self)-> None:
         """ Test aplication synchcronizing a source file over a destination
         folder but this time creating at destination every file present at

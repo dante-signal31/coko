@@ -29,7 +29,9 @@ def parse_arguments(args: list=None) -> configuration.Configuration:
                                  "files to.")
     # TODO: Update help when default ownership is ready.
     arg_parser.add_argument("-c", "--create", dest="default_ownership",
-                            nargs=3, metavar="UID GUID PERMISSION", default=None,
+                            nargs=3, type=int,
+                            metavar="UID GUID PERMISSION",
+                            default=None,
                             help="Copy over files not present at destination "
                                  "folder yet and set for them given uid and guid " \
                                  "and permission. (DOES NOT WORK. PENDING)")

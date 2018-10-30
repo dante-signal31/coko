@@ -2,6 +2,7 @@ import tempfile
 import unittest
 
 import coko.classes.console_parser as console_parser
+import coko.classes.configuration as configuration
 
 
 class TestConsoleParser(unittest.TestCase):
@@ -17,20 +18,21 @@ class TestConsoleParser(unittest.TestCase):
     def test_input(self):
         """ Test a correct input of two folders are properly parsed.
         """
-        parsed_arguments = console_parser.parse_arguments(f"{self.__class__._source_folder} "
-                                                          f"{self.__class__._destination_folder}".split())
+        config = console_parser.parse_arguments(f"{self.__class__._source_folder} "
+                                                f"{self.__class__._destination_folder}".split())
         self.assertEqual(self.__class__._source_folder,
-                         parsed_arguments["source_folder"])
+                         config.source_folder)
         self.assertEqual(self.__class__._destination_folder,
-                         parsed_arguments["destination_folder"])
+                         config.destination_folder)
 
     def test_optional_arguments(self):
         """ Test correct optional parameters are properly parsed.
         """
-        parsed_arguments = console_parser.parse_arguments(f"{self.__class__._source_folder} "
+        config = console_parser.parse_arguments(f"{self.__class__._source_folder} "
                                                           f"{self.__class__._destination_folder} "
                                                           f"--create 10 50 775".split())
-        self.assertEqual(["10", "50", "775"], parsed_arguments["default_ownership"])
+        self.assertEqual(configuration.FileOwnership(10, 50, 775),
+                         config.permissions)
 
 
 if __name__ == '__main__':
