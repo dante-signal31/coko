@@ -41,7 +41,7 @@ def create_file_tree(root_folder: str, files: List[sync.FileInfo])-> None:
                                           file.relative_filename_path)
         os.makedirs(os.path.dirname(absolute_file_path), exist_ok=True)
         with open(absolute_file_path, "w+") as f:
-            f.write(get_random_string(12))
+            f.write(f"{get_random_string(12)}\n")
             sync.set_ownership(absolute_file_path, file.ownership)
 
 
