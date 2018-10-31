@@ -12,11 +12,23 @@ class FileOwnership:
     permissions: int
     permissions_octal: bool = dataclasses.field(default=False)
 
-    def __post_init__(self):
+    def __post_init__(self)-> None:
         # We let user to enter permissions in octal but we convert to int
         # because system functions we use deal with them as int.
+        #
+        # User only would enter permissions in octal in automated tests
+        # contexts. In production coko will get native permissions
+        # directly from files, so what it would read would be int (from st_mode).
         if self.permissions_octal:
             self.permissions = int(str(self.permissions), 8)
+
+    def __eq__(self, other)-> bool:
+        # permissions_octal should not be compared for equality because it is
+        # not actually related to file but just a switch to create automated
+        # tests. If we would let default __eq__ automated test would fail.
+        return all([self.uid == other.uid,
+                    self.guid == other.guid,
+                    self.permissions == other.permissions])
 
 
 class Folder(object):
