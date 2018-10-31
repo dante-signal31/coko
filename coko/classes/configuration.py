@@ -55,8 +55,8 @@ class Configuration:
 
     def __init__(self, source_folder: str, destination_folder: str,
                  permissions: List):
-        self.source_folder: str = source_folder
-        self.destination_folder: str = destination_folder
+        self.source_folder = source_folder
+        self.destination_folder = destination_folder
         # TODO: self.permissions is just a placeholder, I don't know yet its final form.
         if permissions is not None:
             self.permissions: FileOwnership = FileOwnership(permissions[0],

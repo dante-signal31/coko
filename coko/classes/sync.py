@@ -1,6 +1,7 @@
 import dataclasses
 import os
-from typing import List
+import shutil
+from typing import List, Dict
 
 import coko.classes.configuration as configuration
 
@@ -73,5 +74,21 @@ def copy_files(config: configuration.Configuration,
     destination folder.
     :return: None
     """
-    pass
+    destination_files: Dict[str, configuration.FileOwnership] = {item.relative_filename_path: item.ownership
+                                                                 for item in destination_ownerships}
+    for source_file in get_files(config.source_folder):
+        if source_file in destination_files:
+            absolute_source_path = os.path.join(config.source_folder, source_file)
+            absolute_destination_path = os.path.join(config.destination_folder, source_file)
+            # set_ownership() is not needed here because shutil.copyfile
+            # does not overwrite destination file metadata.
+            shutil.copyfile(absolute_source_path, absolute_destination_path)
+
+            # TODO: Refactor code to remove storing destination files metadata.
+            # If shutil.copyfile does not overwrite destination files metadata
+            # then register_destination_files does not need to save them
+            # before copy process. That leads to the point where I need
+            # to think if configuration.FileOwnership, set_ownership() and
+            # even register_destination_nodes are actually needed any longer.
+
 

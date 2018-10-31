@@ -164,7 +164,7 @@ class TestSync(unittest.TestCase):
                     source_file_path = os.path.join(test_bed.source_folder,
                                                     stored_file.relative_filename_path)
                     with open(source_file_path) as f:
-                        source_contents = f.read
+                        source_contents = f.read()
                     self.assertEqual(source_contents, destination_contents)
                     # Check ownership data has been preserved.
                     file_stat = os.stat(destination_file_path)
