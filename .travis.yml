@@ -58,4 +58,4 @@ notifications:
 #install:
 #  - pip install -r requirements.txt
 script:
-  - sudo python -m unittest discover
+  - sudo python3 -m unittest discover
