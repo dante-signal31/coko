@@ -147,9 +147,11 @@ class TestSync(unittest.TestCase):
                                    DUMMY_DESTINATION_FOLDER) as test_bed:
             config = configuration.Configuration(test_bed.source_folder,
                                                  test_bed.destination_folder,
-                                                 [10, 30, 644, True])
+                                                 None)
             stored_file_list: List[sync.FileInfo] = sync.register_destination_files(config)
             sync.copy_files(config, stored_file_list)
+            # Check all files formerly present at destination have updated their
+            # contents but not their metadata.
             for stored_file in stored_file_list:
                 destination_file_path = os.path.join(test_bed.destination_folder,
                                                      stored_file.relative_filename_path)
@@ -171,6 +173,21 @@ class TestSync(unittest.TestCase):
                     self.assertEqual(stored_file.ownership.uid, file_stat.st_uid)
                     self.assertEqual(stored_file.ownership.guid, file_stat.st_gid)
                     self.assertEqual(stored_file.ownership.permissions, file_stat.st_mode)
+            # Check there is not at destination a file not formerly present there.
+            source_file_names = {file.relative_filename_path
+                                 for file in DUMMY_SOURCE_FOLDER}
+            destination_file_names = {file.relative_filename_path
+                                      for file in DUMMY_DESTINATION_FOLDER}
+            files_not_at_destination = source_file_names - destination_file_names
+            for file_name in files_not_at_destination:
+                absolute_path = os.path.join(test_bed.destination_folder,
+                                             file_name)
+                self.assertFalse(os.path.exists(absolute_path))
+
+    def test_copy_files_create(self):
+        """ Test case were creation of new files at destination is allowed.
+        """
+
 
 
 if __name__ == '__main__':
