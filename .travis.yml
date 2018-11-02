@@ -50,12 +50,8 @@ notifications:
 ################################
 # TESTING
 ################################
-#before_install:
-##  - sudo apt-get update -qq
-##  # To test we need docker.io but that comes already packaged in travis image
-##  # so we don't need to install it.
-##  - sudo apt-get install -qq libssl1.0.0 rpm
-#install:
-#  - pip install -r requirements.txt
 script:
+  # If I call simply python3 Travis launch it system wide python3, not the
+  # specially installed python3 for this build. So I have to use the
+  # full path to the created. virtualenv.
   - sudo ~/virtualenv/python3.7/bin/python3 -m unittest discover
