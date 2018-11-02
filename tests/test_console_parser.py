@@ -32,7 +32,7 @@ class TestConsoleParser(unittest.TestCase):
                                                           f"{self.__class__._destination_folder} "
                                                           f"--create 10 50 775".split())
         self.assertEqual(configuration.FileOwnership(10, 50, 775, True),
-                         config.permissions)
+                         config.default_ownership)
 
 
 if __name__ == '__main__':

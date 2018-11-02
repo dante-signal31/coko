@@ -58,6 +58,31 @@ def register_destination_files(config: configuration.Configuration)-> List[FileI
     return destination_files
 
 
+def _copy(source: str, destination: str, permissions: configuration.FileOwnership)-> None:
+    """ Copy a file from source to destination and set at destination given
+    permissions.
+
+    :param source: Source absolute file path.
+    :param destination: Destination absolute file path.
+    :param permissions: File permissions to be set at destination.
+    :return: None
+    """
+    shutil.copy2(source, destination)
+    set_ownership(destination, permissions)
+
+    # set_ownership() would not be needed here because shutil.copyfile
+    # does not overwrite destination file metadata.
+    #
+    # shutil.copyfile(absolute_source_path, absolute_destination_path)
+    #
+    # TODO: Refactor code to remove storing destination files metadata.
+    # If shutil.copyfile does not overwrite destination files metadata
+    # then register_destination_files does not need to save them
+    # before copy process. That leads to the point where I need
+    # to think if configuration.FileOwnership, set_ownership() and
+    # even register_destination_nodes are actually needed any longer.
+
+
 def copy_files(config: configuration.Configuration,
                destination_ownerships: List[FileInfo])-> None:
     """ Walks through original folder copying into destination but keeping
@@ -77,18 +102,22 @@ def copy_files(config: configuration.Configuration,
     destination_files: Dict[str, configuration.FileOwnership] = {item.relative_filename_path: item.ownership
                                                                  for item in destination_ownerships}
     for source_file in get_files(config.source_folder):
+        absolute_source_path = os.path.join(config.source_folder, source_file)
+        absolute_destination_path = os.path.join(config.destination_folder, source_file)
+        # TODO: Add a timestamp check to copy only updated files.
         if source_file in destination_files:
-            absolute_source_path = os.path.join(config.source_folder, source_file)
-            absolute_destination_path = os.path.join(config.destination_folder, source_file)
-            # set_ownership() is not needed here because shutil.copyfile
-            # does not overwrite destination file metadata.
-            shutil.copyfile(absolute_source_path, absolute_destination_path)
+            # Standard use case: copy only files already present at destination.
+            _copy(absolute_source_path, absolute_destination_path,
+                  destination_files[source_file])
+        elif config.default_ownership is not None:
+            # Exceptional case: Create files at destination that were present at
+            # source folder but not at destination one. We only get here
+            # if "--create" flag was used in console command.
+            _copy(absolute_source_path, absolute_destination_path,
+                  config.default_ownership)
 
-            # TODO: Refactor code to remove storing destination files metadata.
-            # If shutil.copyfile does not overwrite destination files metadata
-            # then register_destination_files does not need to save them
-            # before copy process. That leads to the point where I need
-            # to think if configuration.FileOwnership, set_ownership() and
-            # even register_destination_nodes are actually needed any longer.
+
+
+
 
 

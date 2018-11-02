@@ -21,7 +21,7 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual(correct_path, config.source_folder)
         self.assertEqual(correct_path, config.destination_folder)
         self.assertEqual(configuration.FileOwnership(*correct_permissions),
-                         config.permissions)
+                         config.default_ownership)
 
     def test_incorrect_paths(self):
         """ Check an exceptions is raised if any incorrect path is entered.

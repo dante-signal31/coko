@@ -54,16 +54,15 @@ class Configuration:
     destination_folder: Folder = Folder()
 
     def __init__(self, source_folder: str, destination_folder: str,
-                 permissions: List):
+                 default_ownership: List):
         self.source_folder = source_folder
         self.destination_folder = destination_folder
-        # TODO: self.permissions is just a placeholder, I don't know yet its final form.
-        if permissions is not None:
-            self.permissions: FileOwnership = FileOwnership(permissions[0],
-                                                            permissions[1],
-                                                            permissions[2],
-                                                            permissions[3])
+        if default_ownership is not None:
+            self.default_ownership: FileOwnership = FileOwnership(default_ownership[0],
+                                                                  default_ownership[1],
+                                                                  default_ownership[2],
+                                                                  default_ownership[3])
         else:
-            self.permissions = None
+            self.default_ownership = None
 
 
