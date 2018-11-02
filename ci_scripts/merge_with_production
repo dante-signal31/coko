@@ -47,7 +47,7 @@ if __name__ == '__main__':
             print("\nMerging staging with master...")
             merge_with_production(tempdir)
             print("Merged.")
-            print("Pushing to origin...")
+            print("\nPushing to origin...")
             push_to_origin()
             print("Pushed.")
     except:
