@@ -58,4 +58,4 @@ notifications:
 #install:
 #  - pip install -r requirements.txt
 script:
-  - sudo python3 -m unittest discover
+  - sudo ~/virtualenv/python3.7/bin/python3 -m unittest discover
