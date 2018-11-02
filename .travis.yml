@@ -69,4 +69,5 @@ jobs:
     - PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/ci_scripts/
     if: branch = staging
     script:
+    - echo $PYTHONPATH
     - ci_scripts/merge_with_production
