@@ -41,9 +41,15 @@ def push_to_origin(github_repo=GITHUB_REPO, github_token=GITHUB_TOKEN,
 if __name__ == '__main__':
     try:
         with tempfile.TemporaryDirectory() as tempdir:
+            print("Cloning repository...")
             clone_repository(tempdir)
+            print("Cloned.")
+            print("\nMerging staging with master...")
             merge_with_production(tempdir)
+            print("Merged.")
+            print("Pushing to origin...")
             push_to_origin()
+            print("Pushed.")
     except:
         traceback.print_exc(file=sys.stdout)
         sys.exit(1)
