@@ -19,7 +19,7 @@ python:
 #- nightly
 env:
  global:
-   PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/ci_scripts/
+ - PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/ci_scripts/
 # - secure: "Ig3i1GxGTxz+J1LR46cmkkWzpHBUsUVpTVJZ5nyrH6781eoQmZStNfBdmn32MogumbyTnQzUEtWHEdAMErwtmOcCOo0LkrHKYNlJopVA06NwO7+IO8FGpSEydeMYFMsWdEO8Hg2vk/xr+K7UjVcJvG0usPxpEpIE17abif64mnDJXuB3VHchi/0I1BYimnmXVVFh93A+xOdXxbYjnPCDSQQ+f85NqTyMw1aTCkYuqG1XOZBdrO0rGd8McHjdbwLFOmN0Ve6SaollosztA/AgI5VcfsCn4tlSpg6DmY976QWkWchVVQI33vJEYGXiA4VFLzfGJsobQQZHuAieLBsvgj3Lz8OVVItnIPYVOcJ1qDbQP09VZKxFo9zDajJq1169oYSFlOj/0KrHJYEIGHwk+kwBWn6THdnadY8qeko1TEdWfrsgn3gmCUK9njQCA5UJM+7dPTWTE++fSBc0dZqXLV8ooPJ7ZjCMX7BCG0PR9Sr2PRLwOFtGYpWzdu4hIM8r8TBLZfo85LcGwa+mhOtfD+bdxCoYyvsmQzgGpcVWqJc76WuvemHSjmpV08mKu3UHyRPrmUP2yrD700u05kj9G6mpu0ZGzQgq567YaUy/jaQp2esNNhZ4PNdDvKtatUDY7OQ9RXguNKSYNI+b+7IgDdK3vQ4uCBMjDP4F1VEulJ0="
 # matrix:
 #  - TEST_TAG="test_generate_deb"
@@ -65,6 +65,8 @@ jobs:
   # Update master branch.
   - stage: Branch merge to production branch
     python: 3.7
+    env:
+    - PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/ci_scripts/
     if: branch = staging
     script:
     - ci_scripts/merge_with_production
