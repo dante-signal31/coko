@@ -55,3 +55,15 @@ script:
   # specially installed python3 for this build. So I have to use the
   # full path to the created. virtualenv.
   - sudo ~/virtualenv/python3.7/bin/python3 -m unittest discover
+
+################################
+# DEPLOYMENT
+################################
+jobs:
+  include:
+  # Update master branch.
+  - stage: Branch merge to production branch
+    python: 3.7
+    if: branch = staging
+    script:
+    - ci_scripts/merge_with_production
