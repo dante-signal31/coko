@@ -18,19 +18,19 @@ class TestConsoleParser(unittest.TestCase):
     def test_input(self):
         """ Test a correct input of two folders are properly parsed.
         """
-        config = console_parser.parse_arguments(f"{self.__class__._source_folder} "
-                                                f"{self.__class__._destination_folder}".split())
-        self.assertEqual(self.__class__._source_folder,
+        config = console_parser.parse_arguments(f"{TestConsoleParser._source_folder} "
+                                                f"{TestConsoleParser._destination_folder}".split())
+        self.assertEqual(TestConsoleParser._source_folder,
                          config.source_folder)
-        self.assertEqual(self.__class__._destination_folder,
+        self.assertEqual(TestConsoleParser._destination_folder,
                          config.destination_folder)
 
     def test_optional_arguments(self):
         """ Test correct optional parameters are properly parsed.
         """
-        config = console_parser.parse_arguments(f"{self.__class__._source_folder} "
-                                                          f"{self.__class__._destination_folder} "
-                                                          f"--create 10 50 775".split())
+        config = console_parser.parse_arguments(f"{TestConsoleParser._source_folder} "
+                                                f"{TestConsoleParser._destination_folder} "
+                                                f"--create 10 50 775".split())
         self.assertEqual(configuration.FileOwnership(10, 50, 775, True),
                          config.default_ownership)
 
