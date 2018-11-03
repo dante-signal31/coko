@@ -35,7 +35,6 @@ def push_to_origin(github_repo=GITHUB_REPO, github_token=GITHUB_TOKEN,
     # Redirect to /dev/null to avoid secret leakage
     tools.run_console_command("git push {uri} {branch} > /dev/null 2>&1".format(uri=push_uri,
                                                                                 branch=branch_to_merge_into))
-    print("Pushed.")
 
 
 if __name__ == '__main__':
