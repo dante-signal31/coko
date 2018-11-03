@@ -66,7 +66,7 @@ jobs:
   - stage: Branch merge to production branch
     python: 3.7
     env:
-    - PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}/ci_scripts/
+    - PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}"
     if: branch = staging
     script:
     - echo $PYTHONPATH
