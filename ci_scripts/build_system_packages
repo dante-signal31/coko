@@ -5,8 +5,10 @@ import sys
 import traceback
 if sys.version_info.major < 3:
     import ci_tools as tools
+    from .ci_constants import *
 else:
     from ci_scripts import ci_tools as tools
+    from ci_scripts.ci_constants import *
 
 
 def install_vdist():
@@ -18,7 +20,7 @@ def install_vdist():
 def build_packages():
     print("About to run building command from {0}".format(os.getcwd()))
     print("Building system packages...")
-    tools.run_console_command("vdist batch packaging/coko_build.cnf")
+    tools.run_console_command("vdist batch {}".format(VDIST_CONFIGURATION))
     print("System packages built.")
 
 
