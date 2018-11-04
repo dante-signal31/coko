@@ -55,17 +55,17 @@ jobs:
     if: branch = staging
     script:
     - ci_scripts/merge_with_production
-  # Upload packages to Python Package Index.
-  - stage: Pypi deployment
-    python: 3.7
-    script: echo "Deploying to Python Package Index..."
-    deploy:
-    - provider: pypi
-      user: "${PYPI_USER}"
-      password: "${PYPI_PASSWORD}"
-      distributions: "sdist bdist_wheel"
-      on:
-        branch: staging
+#  # Upload packages to Python Package Index.
+#  - stage: Pypi deployment
+#    python: 3.7
+#    script: echo "Deploying to Python Package Index..."
+#    deploy:
+#    - provider: pypi
+#      user: "${PYPI_USER}"
+#      password: "${PYPI_PASSWORD}"
+#      distributions: "sdist bdist_wheel"
+#      on:
+#        branch: staging
   # Build DEB and RPM packages and upload them to Github and Bintray.
   - stage: System packages deployment
     python: 3.7
