@@ -69,6 +69,8 @@ jobs:
   # Build DEB and RPM packages and upload them to Github and Bintray.
   - stage: System packages deployment
     python: 3.7
+    env:
+    - PYTHONPATH="${PYTHONPATH}:${TRAVIS_BUILD_DIR}"
     if: branch = staging
     script:
     - travis_wait 20 ci_scripts/build_system_packages
