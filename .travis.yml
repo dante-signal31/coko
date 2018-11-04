@@ -88,7 +88,7 @@ jobs:
     # Bintray deb repository.
     - provider: bintray
       file: "packaging/coko_deb_bintray_descriptor.json"
-      user: "dante-signal31"
+      user: "${GITHUB_USER}"
       key: "${BINTRAY_TOKEN}"
       skip_cleanup: true
       on:
@@ -96,7 +96,7 @@ jobs:
     # Bintray rpm repository.
     - provider: bintray
       file: "packaging/coko_rpm_bintray_descriptor.json"
-      user: "dante-signal31"
+      user: "${GITHUB_USER}"
       key: "${BINTRAY_TOKEN}"
       skip_cleanup: true
       on:
