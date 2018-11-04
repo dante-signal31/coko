@@ -1,0 +1,34 @@
+{
+    "package": {
+        "name": "coko",
+        "repo": "deb",
+        "subject": "dante-signal31",
+        "desc": "coko (Copy Over Keeping Ownership) is a tool to overwrite directories using files from a different owners but keeping original owners and permissions. ",
+        "website_url": "https://github.com/dante-signal31/coko",
+        "issue_tracker_url": "https://github.com/dante-signal31/coko/issues",
+        "vcs_url": "https://github.com/dante-signal31/vdist.git",
+        "github_use_tag_release_notes": false,
+        "github_release_notes_file": "RELEASE.txt",
+        "licenses": ["BSD-3"],
+        "labels": ["linux", "python", "console"],
+        "public_download_numbers": true,
+        "public_stats": true
+    },
+
+    "version": {
+        "name": "VERSION_TAG",
+        "desc": "coko (Copy Over Keeping Ownership) is a tool to overwrite directories using files from a different owners but keeping original owners and permissions.",
+        "released": "2018-11-04",
+        "vcs_tag": "0.9.0",
+        "gpgSign": false
+    },
+
+    "files":
+      [{"includePattern": "package_dist/(.*\\.deb)", "uploadPattern": "pool/main/v/coko/$1",
+        "matrixParams": {
+            "deb_distribution": "generic",
+            "deb_component": "main",
+            "deb_architecture": "amd64"}
+        }],
+    "publish": true
+}

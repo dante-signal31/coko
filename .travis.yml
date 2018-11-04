@@ -66,3 +66,36 @@ jobs:
       distributions: "sdist bdist_wheel"
       on:
         branch: staging
+  # Build DEB and RPM packages and upload them to Github and Bintray.
+  - stage: System packages deployment
+    python: 3.7
+    if: branch = staging
+    script:
+    - travis_wait 20 ci_scripts/build_system_packages
+    - ci_scripts/tag_release
+    - ci_scripts/create_bintray_descriptors_from_templates
+    deploy:
+    # Github Releases.
+    - provider: releases
+      api_key: "${GITHUB_TOKEN}"
+      file_glob: true
+      file: package_dist/*
+      skip_cleanup: true
+      on:
+        all_branches: true
+    # Bintray deb repository.
+    - provider: bintray
+      file: "packaging/coko_deb_bintray_descriptor.json"
+      user: "dante-signal31"
+      key: "${BINTRAY_TOKEN}"
+      skip_cleanup: true
+      on:
+        all_branches: true
+    # Bintray rpm repository.
+    - provider: bintray
+      file: "packaging/coko_rpm_bintray_descriptor.json"
+      user: "dante-signal31"
+      key: "${BINTRAY_TOKEN}"
+      skip_cleanup: true
+      on:
+        all_branches: true
