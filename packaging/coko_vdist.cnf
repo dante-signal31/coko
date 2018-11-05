@@ -17,7 +17,9 @@ after_install = packaging/postinst.sh
 after_remove = packaging/postuninst.sh
 
 [Ubuntu-package]
+build_deps = libffi-devel
 profile = ubuntu-trusty
 
 [Centos7-package]
+build_deps = libffi-devel
 profile = centos7
