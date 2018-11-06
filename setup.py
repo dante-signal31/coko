@@ -1,4 +1,7 @@
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
+import ci_scripts.ci_tools as tools
+
+VDIST_PACKAGES_CONFIG = "packaging/coko_vdist.cnf"
 
 long_description = """Sometimes you have a directory full of files you want to overwrite periodically.
 
@@ -11,7 +14,7 @@ More info in: https://github.com/dante-signal31/coko
 """
 
 setup(name="coko",
-      version="1.0.3",
+      version=tools.get_current_version(VDIST_PACKAGES_CONFIG),
       description="This tools let you take an snapshot of your files metadata "
                   "in a particular directory in order to restore those metadata "
                   "after files have been restored.",
