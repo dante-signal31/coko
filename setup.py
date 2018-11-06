@@ -11,7 +11,7 @@ More info in: https://github.com/dante-signal31/coko
 """
 
 setup(name="coko",
-      version="1.0.2",
+      version="1.0.3",
       description="This tools let you take an snapshot of your files metadata "
                   "in a particular directory in order to restore those metadata "
                   "after files have been restored.",
