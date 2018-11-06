@@ -24,6 +24,6 @@
     },
 
     "files":
-      [{"includePattern": "package_dist/(.*\\.rpm)", "uploadPattern": "$1"}],
+      [{"includePattern": "coko_vdist/(.*\\.rpm)", "uploadPattern": "$1"}],
     "publish": true
 }

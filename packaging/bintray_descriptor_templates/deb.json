@@ -24,7 +24,7 @@
     },
 
     "files":
-      [{"includePattern": "package_dist/(.*\\.deb)", "uploadPattern": "pool/main/v/coko/$1",
+      [{"includePattern": "coko_vdist/(.*\\.deb)", "uploadPattern": "pool/main/v/coko/$1",
         "matrixParams": {
             "deb_distribution": "generic",
             "deb_component": "main",
