@@ -86,7 +86,7 @@ jobs:
     - provider: releases
       api_key: "${GITHUB_TOKEN}"
       file_glob: true
-      file: package_dist/*
+      file: coko_vdist/*
       skip_cleanup: true
       on:
         all_branches: true
