@@ -32,6 +32,5 @@ RUN adduser alan && \
     echo "cccc" >> /home/bob/coko_test/folder1/data1 && \
     echo "dddd" >> /home/bob/coko_test/folder1/data2 && \
     echo "eeee" >> /home/bob/coko_test/folder2/data3 && \
-    echo "ffff" >> /home/bob/coko_test/folder1/folder3exit
-    /data4 && \
+    echo "ffff" >> /home/bob/coko_test/folder1/folder3/data4 && \
     chown bob /home/bob/coko_test -R
