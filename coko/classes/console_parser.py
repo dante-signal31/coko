@@ -29,10 +29,10 @@ def parse_arguments(args: list=None) -> configuration.Configuration:
                                  "files to.")
     arg_parser.add_argument("-c", "--create", dest="default_ownership",
                             nargs=3, type=int,
-                            metavar="UID GUID PERMISSION",
+                            metavar=("UID", "GID", "PERMISSION"),
                             default=None,
                             help="Copy over files not present at destination "
-                                 "folder yet and set for them given uid and guid " \
+                                 "folder yet and set for them given uid and gid " \
                                  "and permission.")
 
     # Parse_args returns each parameter in a list. We must take them out so
