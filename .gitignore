@@ -5,6 +5,8 @@
 
 .idea
 venv*
+coko.egg-info
+dist
 
 # User-specific stuff
 .idea/**/workspace.xml
