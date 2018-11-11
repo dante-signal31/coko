@@ -2,17 +2,30 @@
 
 import sys
 import subprocess
+import contextlib
 if sys.version_info.major < 3:
     import ConfigParser as configparser
 else:
     import configparser
 
 
-def get_current_version(configuration_file):
+@contextlib.contextmanager
+def read_configuration(configuration_file):
     parser = _get_config_parser()
     parser.read(configuration_file)
-    version = _get_version(parser)
-    return version
+    yield parser
+
+
+def get_current_version(configuration_file):
+    with read_configuration(configuration_file) as parser:
+        version = _get_version(parser)
+        return version
+
+
+def get_python_version_to_package(configuration_file):
+    with read_configuration(configuration_file) as parser:
+        python_version = _get_python_version(parser)
+        return python_version
 
 
 def _get_config_parser():
@@ -24,12 +37,20 @@ def _get_config_parser():
     return parser
 
 
-def _get_version(parser):
+def _get_value(parser, section, parameter):
     if sys.version_info[0] == 3:
-        version = parser["DEFAULT"]["version"]
+        value = parser[section][parameter]
     else:
-        version = parser.get("DEFAULT", "version")
-    return version
+        value = parser.get(section, parameter)
+    return value
+
+
+def _get_version(parser):
+    return _get_value(parser, "DEFAULT", "version")
+
+
+def _get_python_version(parser):
+    return _get_value(parser, "DEFAULT", "python_version")
 
 
 def run_console_command(command):
