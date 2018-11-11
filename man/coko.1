@@ -3,7 +3,7 @@
 coko \- Copy over files keeping ownership permission at destination.
 .SH SYNOPSYS
 .B coko
-SOURCE_FOLDER DESTINATION_FOLDER [\fB-c\fR \fIUID\fR \fIGID\fR \fIPERMISSION\fR] [\B--create\fR \fIUID\fR \fIGID\fR \fIPERMISSION\fR]
+SOURCE_FOLDER DESTINATION_FOLDER [\fB-c\fR \fIUID\fR \fIGID\fR \fIPERMISSION\fR] [\fB--create\fR \fIUID\fR \fIGID\fR \fIPERMISSION\fR]
 .SH DESCRIPTION
 Sometimes you have a directory full of files you want to overwrite periodically.
 .PP
@@ -20,7 +20,10 @@ directory from SOURCE_FOLDER and restoring those metadata after the copy process
 \fB-c, --create\fR UID GID PERMISSION
 By default, coko does not copy files not present yet at DESTINATION_FOLDER but if you set this flag then those files
 present at SOURCE_FOLDER that are not at DESTINATION_FOLDER will be copied and its metadata will be set to those you
-gave after the flag.
+gave after the flag. Be aware that PERMISSION should be entered in octal entering not only the digits you enter
+in chmod but upper part of filetype too (i.e. if you enter at chmod 755 for a regular file to make it executable,
+here you should enter 100755). To get a list of possible upper parts you could enter have a look to miku answer at:
+https://stackoverflow.com/questions/5337070/how-can-i-get-a-files-permission-mask/5337329
 .SH AUTHOR
 Written by Dante Signal31 <dante.signal31@gmail.com>.
 .SH REPORTING BUGS
