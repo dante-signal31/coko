@@ -12,7 +12,7 @@ def parse_arguments(args: list=None) -> configuration.Configuration:
     :param args: Argument list. Usually it's the command you entered but split by spaces.
     :return: Configuration object generated from parsed parameters console command.
     """
-    arg_parser = argparse.ArgumentParser(description="A Tool to overwrite directories "
+    arg_parser = argparse.ArgumentParser(description="A tool to overwrite directories "
                                                      "using files from a different "
                                                      "owners but keeping original "
                                                      "owners and permissions.\n",
