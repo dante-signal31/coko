@@ -4,11 +4,11 @@ MAINTAINER dante-signal31 (dante.signal31@gmail.com)
 RUN set -e
 # Install coko.
 RUN apt-get update && \
-    apt-get install apt-utils apt-transport-https gnupg ca-certificates -y && \
+    apt-get install man -y
+RUN apt-get install apt-utils apt-transport-https gnupg ca-certificates -y && \
     echo "deb [trusted=yes] https://dl.bintray.com/dante-signal31/deb generic main" | tee -a /etc/apt/sources.list && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61 && \
-    apt-get update && \
-    apt-get install man -y && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+RUN apt-get update && \
     apt-get install coko -y
 # Prepare test bed.
 RUN adduser alan && \
