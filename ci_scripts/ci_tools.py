@@ -25,8 +25,8 @@ def get_current_version(configuration_file):
 def get_python_version_to_package(configuration_file):
     with read_configuration(configuration_file) as parser:
         python_version = _get_value(parser, "DEFAULT", "python_version")
-        # TODO: We only need major and minor versions.
-        return python_version
+        python_version_parts = python_version.split(".")
+        return "{}.{}".format(python_version_parts[0], python_version_parts[1])
 
 
 def get_app_name(configuration_file):
