@@ -1,9 +1,9 @@
 [DEFAULT]
 app = coko
 version = 1.0.13
-; This configurations only works for Travis builds.
-; If you want to build locally use coko_vdist_local.cnf.
-source_git_directory = /home/travis/build/dante-signal31/${app}, master
+; Change next value for wherever your local coko folder is.
+; Don't forget you should run ci_scripts/create_postinst_script.
+source_git_directory = /home/dante/Projects/${app}, master
 fpm_args = --maintainer dante.signal31@gmail.com -a native --url
     https://github.com/dante-signal31/${app} --description
     "This tools let you take an snapshot of your files metadata
