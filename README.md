@@ -1,6 +1,11 @@
 # Copy Over Keeping Ownership (coko)
 Tool to overwrite directories using files from a different owners but keeping original owners and permissions.
 ____
+
+**THIS IS AN ABSOLUTELY USELESS TOOL** 
+*We were mistaken about native cp behaviour. So in the end this tool was not used. I keep this repo here to use it as a reference, because I've tried some new things I want to apply to my other projects.* 
+____
+
 Sometimes you have a directory full of files you want to overwrite periodically. 
 
 You may not want to edit those files directly but let other users edit their own copy of those files to sync them over original ones afterwards. 
